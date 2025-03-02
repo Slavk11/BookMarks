@@ -2,8 +2,10 @@ package main
 
 import "fmt"
 
+type bookmarkMap = map[string]string
+
 func main() {
-	bookMarks := map[string]string{}
+	bookMarks := bookmarkMap{}
 Menu:
 	for {
 		variant := getMenu()
@@ -21,7 +23,7 @@ Menu:
 }
 
 // Просмотреть закладки
-func checkBookMarks(bookMarks map[string]string) {
+func checkBookMarks(bookMarks bookmarkMap) {
 	if len(bookMarks) == 0 {
 		fmt.Println("Пока нет закладок")
 	}
@@ -31,7 +33,7 @@ func checkBookMarks(bookMarks map[string]string) {
 }
 
 // Добавить закладку
-func addNewBookMark(toMap map[string]string) map[string]string {
+func addNewBookMark(toMap bookmarkMap) bookmarkMap {
 	key := ""
 	value := ""
 
@@ -45,7 +47,7 @@ func addNewBookMark(toMap map[string]string) map[string]string {
 }
 
 // Удалить закладку
-func deleteBookMark(fromMap map[string]string) map[string]string {
+func deleteBookMark(fromMap bookmarkMap) bookmarkMap {
 	key := ""
 
 	fmt.Printf("Введите название закладки для удаления")
