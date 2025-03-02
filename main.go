@@ -4,51 +4,62 @@ import "fmt"
 
 func main() {
 	bookMarks := map[string]string{}
-
+Menu:
 	for {
-		fmt.Println("***___Утилита закладки___***\n - 1. Посмотреть закладки\n - 2. Добавить закладку\n - 3. Удалить закладку \n - 4. Выход")
-		var userChoise int
-		fmt.Scanln(&userChoise)
-
-		switch userChoise {
+		variant := getMenu()
+		switch variant {
 		case 1:
 			checkBookMarks(bookMarks)
 		case 2:
-			key := ""
-			value := ""
-
-			fmt.Printf("Введите название закладки: ")
-			fmt.Scanln(&key)
-			fmt.Printf("Введите сайт для закладки: \"%s\":\n", key)
-			fmt.Scanln(&value)
-			addNewBookMark(key, value, bookMarks)
-			fmt.Printf("Закладка \"%s\" добавлена!\n", key)
+			addNewBookMark(bookMarks)
 		case 3:
-			key := ""
-			fmt.Printf("Введите название закладки для удаления")
-			deleteBookMark(key, bookMarks)
-			fmt.Printf("Закладка \"%s\" удалена!\n", key)
-
+			deleteBookMark(bookMarks)
 		case 4:
-			return
+			break Menu
 		}
 	}
 }
 
 // Просмотреть закладки
 func checkBookMarks(bookMarks map[string]string) {
-	fmt.Println(bookMarks)
+	if len(bookMarks) == 0 {
+		fmt.Println("Пока нет закладок")
+	}
+	for key, value := range bookMarks {
+		fmt.Println(key, ": ", value)
+	}
 }
 
 // Добавить закладку
-func addNewBookMark(key string, value string, toMap map[string]string) map[string]string {
+func addNewBookMark(toMap map[string]string) map[string]string {
+	key := ""
+	value := ""
+
+	fmt.Printf("Введите название закладки: ")
+	fmt.Scanln(&key)
+	fmt.Printf("Введите сайт для закладки: \"%s\":\n", key)
+	fmt.Scanln(&value)
 	toMap[key] = value
+	fmt.Printf("Закладка \"%s\" добавлена!\n", key)
 	return toMap
 }
 
 // Удалить закладку
-func deleteBookMark(key string, fromMap map[string]string) map[string]string {
+func deleteBookMark(fromMap map[string]string) map[string]string {
+	key := ""
+
+	fmt.Printf("Введите название закладки для удаления")
 	fmt.Scanln(&key)
 	delete(fromMap, key)
+	fmt.Printf("Закладка \"%s\" удалена!\n", key)
 	return fromMap
+}
+
+// Вызов Меню
+func getMenu() int {
+	fmt.Println("***___Утилита закладки___***\n - 1. Посмотреть закладки\n - 2. Добавить закладку\n - 3. Удалить закладку \n - 4. Выход")
+	var userChoise int
+	fmt.Scanln(&userChoise)
+
+	return userChoise
 }
