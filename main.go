@@ -33,7 +33,7 @@ func checkBookMarks(bookMarks bookmarkMap) {
 }
 
 // Добавить закладку
-func addNewBookMark(toMap bookmarkMap) bookmarkMap {
+func addNewBookMark(toMap bookmarkMap) {
 	key := ""
 	value := ""
 
@@ -43,18 +43,16 @@ func addNewBookMark(toMap bookmarkMap) bookmarkMap {
 	fmt.Scanln(&value)
 	toMap[key] = value
 	fmt.Printf("Закладка \"%s\" добавлена!\n", key)
-	return toMap
 }
 
 // Удалить закладку
-func deleteBookMark(fromMap bookmarkMap) bookmarkMap {
+func deleteBookMark(fromMap bookmarkMap) {
 	key := ""
 
 	fmt.Printf("Введите название закладки для удаления")
 	fmt.Scanln(&key)
 	delete(fromMap, key)
 	fmt.Printf("Закладка \"%s\" удалена!\n", key)
-	return fromMap
 }
 
 // Вызов Меню
